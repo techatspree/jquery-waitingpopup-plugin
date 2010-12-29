@@ -55,11 +55,17 @@ These are the settings you can change to your special use case:
     });
 
 
-Automatic Ajax binding
+Ajax binding
 ----------------------
+
 By default, the ajax binding is done right out of the box. That means that everytime a JQuery based Ajax request is started,
 the waitingpopup dialog is shown and will be hidden, when the ajax request is completed.
 The binding is done to the JQuery events *ajaxStart* and *ajaxStop*.
+
+Besides the automatically binding you can register the Ajax binding manually with the following methods:
+
+    $().waitingpopup("bindToAjax");
+    $().waitingpopup("unbindToAjax");
 
 To see some more examples please have a look into the Tests in src/test/javascript/WaitingPopupTest.js
 
