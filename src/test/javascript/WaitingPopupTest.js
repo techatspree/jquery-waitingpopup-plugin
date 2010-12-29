@@ -35,8 +35,8 @@ function testCloseWaitingPopup() {
     assertFalse("Waiting Dialog is shown but should not!", $('.waitingpopup').is(':visible'));
 }
 
-function testAjaxBinding() {
-    console.log('Testcase: testAjaxBinding');
+function testAutomaticallyAjaxBinding() {
+    console.log('Testcase: testAutomaticallyAjaxBinding');
     $().waitingpopup({ajaxBinding : true});
     // Ajax Binding should be done right now
     assertTrue("Waiting Dialog not created!", $('.waitingpopup').length > 0);
@@ -55,8 +55,8 @@ function testAjaxBinding() {
     assertFalse("Waiting Dialog is shown but should not!", $('.waitingpopup').is(':visible'));
 }
 
-function testAjaxBindingDeactivated() {
-    console.log('Testcase: testAjaxBindingDeactivated');
+function testAutomaticallyAjaxBindingOff() {
+    console.log('Testcase: testAutomaticallyAjaxBindingOff');
     $().waitingpopup({ajaxBinding : false});
     // Ajax Binding must not be done
     assertTrue("Waiting Dialog not created!", $('.waitingpopup').length > 0);
@@ -73,4 +73,44 @@ function testAjaxBindingDeactivated() {
     });
     // Waiting Popup should now be gone
     assertFalse("Waiting Dialog is shown but should not!", $('.waitingpopup').is(':visible'));
+}
+
+function testManuallyAjaxBinding() {
+    console.log('Testcase: testManuallyAjaxBinding');
+    $().waitingpopup({ajaxBinding : false});
+    // Ajax Binding must not be done
+    assertTrue("Waiting Dialog not created!", $('.waitingpopup').length > 0);
+    assertFalse("Waiting Dialog is shown but should not!", $('.waitingpopup').is(':visible'));
+
+    // Doing some ajax stuff
+    // Testenvironment is threadless, so the test of visibility of waitingialog is done in a hook in
+    // of the JQuery Ajax
+    $.ajax({
+        url: 'dummyURL',
+        beforeSend: function(XMLHttpRequest) {
+            assertFalse("Waiting Dialog is shown but should not!", $('.waitingpopup').is(':visible'));
+        }
+    });
+    // Waiting Popup should now be gone
+    assertFalse("Waiting Dialog is shown but should not!", $('.waitingpopup').is(':visible'));
+
+
+    // enabling ajax binding
+    $().waitingpopup('bindToAjax');
+    $.ajax({
+        url: 'dummyURL',
+        beforeSend: function(XMLHttpRequest) {
+            assertTrue("Waiting Dialog is not shown but should be!", $('.waitingpopup').is(':visible'));
+        }
+    });
+
+    // disabling ajax binding
+    $().waitingpopup('unbindToAjax');
+    $.ajax({
+        url: 'dummyURL',
+        beforeSend: function(XMLHttpRequest) {
+            assertFalse("Waiting Dialog is shown but should not!", $('.waitingpopup').is(':visible'));
+        }
+    });
+
 }
