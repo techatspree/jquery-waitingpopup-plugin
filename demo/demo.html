@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link type="text/css" href="css/jquery-ui-1.8.7.custom.css" rel="stylesheet"/>
+    <link type="text/css" href="css/jquery.waitingpopup.css" rel="stylesheet"/>
+    <script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.8.7.custom.min.js"></script>
+    <script type="text/javascript" src="jquery.waitingpopup.js"></script>
+
+
+    <title>akquinet/jquery-waitingpopup-plugin Demo</title>
+
+    <style type="text/css">
+        body {
+            background-color: white;
+            color: #555;
+            font-family: Verdana, Helvetica, Geneva, Arial, sans-serif;
+            margin: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            padding: 0px;
+            padding-top: 0px;
+            padding-right: 0px;
+            padding-bottom: 0px;
+            padding-left: 0px;
+        }
+
+        #container {
+            margin: 0 auto;
+            width: 700px;
+        }
+
+        h1 {
+            padding-top: 17px;
+            padding-right: 0px;
+            padding-bottom: 9px;
+        }
+
+        h1 .small {
+            font-size: 0.4em;
+        }
+
+        h1 a {
+            color: #94c22b;
+            text-decoration: none
+        }
+
+        h2 {
+            border-bottom: 1px solid white;
+            display: block;
+        }
+
+        h3 {
+            text-align: center;
+            color: #fa8544;
+        }
+
+        a {
+            color: #7ea624;
+        }
+
+        .description {
+            font-size: 1em;
+            margin-bottom: 30px;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        .logo {
+            float: right;
+            padding-right: 75px;
+        }
+
+        pre {
+            background: #c3c3c3;
+            color: #3f3f3f;
+            padding: 15px;
+        }
+
+        hr {
+            border: 0;
+            width: 80%;
+            border-bottom: 1px solid #aaa
+        }
+
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+
+    function showWaitingppopup() {
+        // Initialization if the waitingpopup plugin
+        $().waitingpopup();
+
+        // open die waitingpopup
+        $().waitingpopup('open');
+        // call to close the waitingpopup after 3 seconds
+        setTimeout("$().waitingpopup('close')", 3000);
+    }
+
+</script>
+<div id="container">
+    <a href="http://github.com/akquinet/jquery-waitingpopup-plugin"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
+    <h1><a href="http://github.com/akquinet/jquery-waitingpopup-plugin">jquery-waitingpopup-plugin Demo</a>
+        <br/><span class="small">by <a href="http://github.com/akquinet">akquinet</a></span></h1>
+
+    <div>
+        <p>
+            To see the waiting dialog just click on the link below.
+        </p>
+        <p>
+            <span class="description">Show the waitingpopup for 3 seconds </span> <a href="javascript:showWaitingppopup();">start</a>
+        </p>
+
+    </div>
+
+    <h2>Documentation</h2>
+
+    <p>jquery-waitingpopup-plugin documentation is available on the <a
+            href="http://github.com/akquinet/jquery-waitingpopup-plugin/wiki">wiki</a>.</p>
+
+    <h2>License</h2>
+
+    <p>jquery-waitingpopup-plugin is licensed under the Apache License 2.0. The project was founded by <a
+            href="http://www.akquinet.de/en">akquinet A.G.</a>.</p>
+
+</div>
+
+<div id="wd"></div>
+
+</body>
+</html>
