@@ -1,0 +1,114 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/*
+<span class='line'>  2</span>  * Copyright 2010 akquinet
+<span class='line'>  3</span>  * Licensed under the Apache License, Version 2.0 (the "License");
+<span class='line'>  4</span>  * you may not use this file except in compliance with the License.
+<span class='line'>  5</span>  * You may obtain a copy of the License at
+<span class='line'>  6</span>  *
+<span class='line'>  7</span>  *   http://www.apache.org/licenses/LICENSE-2.0
+<span class='line'>  8</span>  *
+<span class='line'>  9</span>  * Unless required by applicable law or agreed to in writing, software
+<span class='line'> 10</span>  * distributed under the License is distributed on an "AS IS" BASIS,
+<span class='line'> 11</span>  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class='line'> 12</span>  * See the License for the specific language governing permissions and
+<span class='line'> 13</span>  * limitations under the License.
+<span class='line'> 14</span>  */</span><span class="WHIT">
+<span class='line'> 15</span> 
+<span class='line'> 16</span> </span><span class="COMM">/**
+<span class='line'> 17</span>  *
+<span class='line'> 18</span>  *   Author: Daniel Bremer-Tonn
+<span class='line'> 19</span> **/</span><span class="WHIT">
+<span class='line'> 20</span> </span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">$</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 21</span> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 22</span> 	</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">methods</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 23</span>         </span><span class="NAME">init</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">options</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 24</span>             </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">settings</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 25</span>                 </span><span class="NAME">ajaxBinding</span><span class="PUNC">:</span><span class="WHIT">    </span><span class="KEYW">true</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 26</span>                 </span><span class="NAME">lableText</span><span class="PUNC">:</span><span class="WHIT">      </span><span class="STRN">'Please wait...'</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 27</span>                 </span><span class="NAME">sublableText</span><span class="PUNC">:</span><span class="WHIT">   </span><span class="STRN">'loading'</span><span class="WHIT">
+<span class='line'> 28</span>             </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 29</span> 
+<span class='line'> 30</span>             </span><span class="COMM">// If options exist, lets merge them</span><span class="WHIT">
+<span class='line'> 31</span>             </span><span class="COMM">// with our default settings</span><span class="WHIT">
+<span class='line'> 32</span>             </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">options</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 33</span>                 </span><span class="NAME">$.extend</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">settings</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">options</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 34</span>             </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 35</span> 
+<span class='line'> 36</span>             </span><span class="COMM">// Creating the actual dialog only, if its not done already</span><span class="WHIT">
+<span class='line'> 37</span>             </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#waiting_popup'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">length</span><span class="WHIT"> </span><span class="PUNC">&lt;</span><span class="WHIT"> </span><span class="NUMB">1</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 38</span>             </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 39</span>                 </span><span class="COMM">// Generating the html for the dialog</span><span class="WHIT">
+<span class='line'> 40</span>                 </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'body'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">append</span><span class="PUNC">(</span><span class="WHIT">
+<span class='line'> 41</span>                      </span><span class="STRN">"&lt;div id='waiting_popup' style='display:none;' class='waitingpopup-content'>"</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 42</span>                      </span><span class="STRN">"&lt;div class='waitingpopup-content-lable'>"</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">settings.lableText</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">"&lt;/div>"</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 43</span>                      </span><span class="STRN">"&lt;div class='waitingpopup-content-sublable'>"</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">settings.sublableText</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">"&lt;/div>&lt;/div>"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 44</span> 
+<span class='line'> 45</span>                 </span><span class="COMM">// height of the dialog is browser specific. We have to choose more pixels on the IE</span><span class="WHIT">
+<span class='line'> 46</span>                 </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">dialog_height</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">$.browser.msie</span><span class="WHIT"> </span><span class="PUNC">?</span><span class="WHIT"> </span><span class="NUMB">180</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">100</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 47</span> 
+<span class='line'> 48</span>                 </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#waiting_popup'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">dialog</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 49</span>                     </span><span class="NAME">dialogClass</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">'waitingpopup'</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 50</span>                     </span><span class="NAME">autoOpen</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 51</span>                     </span><span class="NAME">width</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">250</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 52</span>                     </span><span class="NAME">height</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">dialog_height</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 53</span>                     </span><span class="NAME">modal</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 54</span>                     </span><span class="NAME">draggable</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 55</span>                     </span><span class="NAME">resizable</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 56</span>                     </span><span class="NAME">closeOnEscape</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="WHIT">
+<span class='line'> 57</span>                     </span><span class="COMM">//open: function(event, ui) { $("#waiting_popup .ui-dialog-titlebar").hide(); }</span><span class="WHIT">
+<span class='line'> 58</span>                 </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 59</span>                 </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">".waitingpopup .ui-dialog-titlebar"</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">hide</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 60</span>             </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 61</span> 
+<span class='line'> 62</span>             </span><span class="COMM">// Setting the ajaxbindings</span><span class="WHIT">
+<span class='line'> 63</span>             </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">settings.ajaxBinding</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 64</span>                 </span><span class="NAME">$</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">waitingpopup</span><span class="PUNC">(</span><span class="STRN">'unbindToAjax'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 65</span>                 </span><span class="NAME">$</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">waitingpopup</span><span class="PUNC">(</span><span class="STRN">'bindToAjax'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 66</span>             </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 67</span>         </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 68</span> 
+<span class='line'> 69</span>         </span><span class="NAME">bindToAjax</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 70</span>             </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#waiting_popup'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">bind</span><span class="PUNC">(</span><span class="STRN">'ajaxStart'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 71</span>                 </span><span class="NAME">$</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">waitingpopup</span><span class="PUNC">(</span><span class="STRN">'open'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 72</span>             </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 73</span>             </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#waiting_popup'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">bind</span><span class="PUNC">(</span><span class="STRN">'ajaxStop'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 74</span>                </span><span class="NAME">$</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">waitingpopup</span><span class="PUNC">(</span><span class="STRN">'close'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 75</span>             </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 76</span>         </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 77</span> 
+<span class='line'> 78</span>         </span><span class="NAME">unbindToAjax</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 79</span>             </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#waiting_popup'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">unbind</span><span class="PUNC">(</span><span class="STRN">'ajaxStart'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 80</span>             </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#waiting_popup'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">unbind</span><span class="PUNC">(</span><span class="STRN">'ajaxStop'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 81</span>         </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 82</span> 
+<span class='line'> 83</span>         </span><span class="NAME">open</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 84</span>         </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 85</span>             </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">"#waiting_popup"</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">dialog</span><span class="PUNC">(</span><span class="STRN">"open"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 86</span>         </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 87</span> 
+<span class='line'> 88</span>         </span><span class="NAME">close</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 89</span>         </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 90</span>             </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">"#waiting_popup"</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">dialog</span><span class="PUNC">(</span><span class="STRN">"close"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 91</span>         </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 92</span> 
+<span class='line'> 93</span>     </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 94</span> 
+<span class='line'> 95</span>     </span><span class="NAME">$.fn.waitingpopup</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">method</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 96</span> 
+<span class='line'> 97</span>         </span><span class="COMM">// Method calling logic</span><span class="WHIT">
+<span class='line'> 98</span>         </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">methods</span><span class="PUNC">[</span><span class="NAME">method</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 99</span>           </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">methods</span><span class="PUNC">[</span><span class="WHIT"> </span><span class="NAME">method</span><span class="WHIT"> </span><span class="PUNC">]</span><span class="PUNC">.</span><span class="NAME">apply</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Array.prototype.slice.call</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">arguments</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">1</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>100</span>         </span><span class="PUNC">}</span><span class="WHIT"> </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="WHIT"> </span><span class="KEYW">typeof</span><span class="WHIT"> </span><span class="NAME">method</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="STRN">'object'</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="WHIT"> </span><span class="NAME">method</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>101</span>           </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">methods.init.apply</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">arguments</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>102</span>         </span><span class="PUNC">}</span><span class="WHIT"> </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>103</span>           </span><span class="NAME">$.error</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="STRN">'Method '</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT">  </span><span class="NAME">method</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' does not exist on jQuery.waitingpopup'</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>104</span>         </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>105</span>     </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>106</span> 
+<span class='line'>107</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="NAME">jQuery</span><span class="PUNC">)</span><span class="PUNC">;</span></pre></body></html>
