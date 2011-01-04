@@ -13,13 +13,12 @@
     padding: 0;
     overflow: hidden;
     border: 1px solid #999;
-    font-family: Verdana, Arial, sans-serif;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     -webkit-background-size: 100px 100px;
-    background-color: #4F4C4C;
     background: -webkit-gradient(linear, 0 0, 100 100, color-stop(0.00, rgba(255, 255, 255, 0.1)), color-stop(0.25, rgba(255, 255, 255, 0.1)), color-stop(0.26, rgba(255, 255, 255, 0)), color-stop(0.50, rgba(255, 255, 255, 0)), color-stop(0.51, rgba(255, 255, 255, 0.1)), color-stop(0.75, rgba(255, 255, 255, 0.1)), color-stop(0.76, rgba(255, 255, 255, 0)), color-stop(1.00, rgba(255, 255, 255, 0))), -webkit-gradient(linear, left top, left bottom, color-stop(0, #4F4C4C), color-stop(1, #262525));
     -webkit-animation: animate-stripes 2s linear infinite;
+    background-color: #4F4C4C;
 }
 
 .waitingpopup-content {

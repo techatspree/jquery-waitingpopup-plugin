@@ -42,11 +42,14 @@
                      "<div class='waitingpopup-content-lable'>" + settings.lableText + "</div>" +
                      "<div class='waitingpopup-content-sublable'>" + settings.sublableText + "</div></div>");
 
+                // height of the dialog is browser specific. We have to choose more pixels on the IE
+                var dialog_height = $.browser.msie ? 180 : 100;
+
                 $('#waiting_popup').dialog({
                     dialogClass: 'waitingpopup',
                     autoOpen: false,
                     width: 250,
-                    height: 100,
+                    height: dialog_height,
                     modal: true,
                     draggable: false,
                     resizable: false,
