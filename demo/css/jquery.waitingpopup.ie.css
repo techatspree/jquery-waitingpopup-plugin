@@ -1,0 +1,30 @@
+.waitingpopup {
+    width: 250px;
+    height: 100px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #999;
+    background-color: #4F4C4C;
+}
+
+.waitingpopup-content {
+    overflow: visible;
+}
+
+.waitingpopup-content-lable {
+    color: #FFF;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.waitingpopup-content-sublable {
+    font-size: 14px;
+    color: #FFF;
+    text-align: center;
+    padding: 2px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
