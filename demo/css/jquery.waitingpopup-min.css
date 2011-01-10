@@ -1,0 +1,7 @@
+@-webkit-keyframes animate-stripes{from{background-position:100px 0;}
+to{background-position:0 0;}
+}
+.waitingpopup{width:250px;height:100px;padding:0;overflow:hidden;border:1px solid #999;-moz-border-radius:10px;-webkit-border-radius:10px;-webkit-background-size:100px 100px;background:-webkit-gradient(linear,0 0,100 100,color-stop(0.00,rgba(255,255,255,0.1)),color-stop(0.25,rgba(255,255,255,0.1)),color-stop(0.26,rgba(255,255,255,0)),color-stop(0.50,rgba(255,255,255,0)),color-stop(0.51,rgba(255,255,255,0.1)),color-stop(0.75,rgba(255,255,255,0.1)),color-stop(0.76,rgba(255,255,255,0)),color-stop(1.00,rgba(255,255,255,0))),-webkit-gradient(linear,left top,left bottom,color-stop(0,#4F4C4C),color-stop(1,#262525));-webkit-animation:animate-stripes 2s linear infinite;background-color:#4F4C4C;}
+.waitingpopup-content{overflow:visible;}
+.waitingpopup-content-lable{color:#FFF;font-size:20px;font-weight:bold;text-align:center;padding-top:10px;}
+.waitingpopup-content-sublable{font-size:14px;color:#FFF;text-align:center;background:rgba(131,154,40,0.7);padding:2px;margin-top:10px;margin-left:10px;margin-right:10px;-moz-border-radius:20px;-webkit-border-radius:20px;}
