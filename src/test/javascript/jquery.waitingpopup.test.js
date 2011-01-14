@@ -1,6 +1,6 @@
 describe('the Waitingpopup jQuery Plugin',function(){
 
-	// Remove any exisiting toastmessage container
+	// Remove any exisiting waitingpopup dialogs
 	beforeEach(function() {
         $('#waiting_popup').dialog('destroy');
         $('#waiting_popup').remove();
